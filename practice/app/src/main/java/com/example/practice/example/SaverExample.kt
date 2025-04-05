@@ -1,6 +1,7 @@
 package com.example.practice.example
 
 import android.os.Parcelable
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,12 +24,6 @@ fun CityScreen(modifier: Modifier = Modifier) {
         mutableStateOf(City("Madrid", "Spain"))
     }
     Text("${selectedCity.name} ${selectedCity.country}")
-}
-
-@Preview
-@Composable
-private fun Fuck() {
-    CityScreen()
 }
 
 data class City2(val name: String, val country: String) {
@@ -72,28 +67,28 @@ fun CityScreen2(modifier: Modifier = Modifier) {
     Text("${selectedCity.name}\t${selectedCity.country}")
 }
 
+data class FuckYou(var a: Int, var b: String)
 
-@Preview
-@Composable
-private fun Suck() {
-    CityScreen2()
-}
-
-data class FuckYou(var a: Int, var b: String) {
-    companion object {
-        val aKey: String = "Int"
-        val bKey: String = "String"
-//        val fuckMapSaver = mapSaver(
-//            save={ mapOf(aKey to it.a, bKey to it.b) },
-//            restore =
-//        )
-    }
-}
+val fuckStateSaver =
+    Saver<FuckYou,Any>(
+        save = {
+            listOf(it.a,it.b)
+        },
+        restore = {
+//            val list = it as List<*>
+            FuckYou(it[0] as Int, it[1] as String)
+        }
+    )
 
 @Preview
 @Composable
 private fun Shit() {
-
+    var state by rememberSaveable(stateSaver = fuckStateSaver) {
+        mutableStateOf(FuckYou(2, "FUck"))
+    }
+    Button({ state = FuckYou(state.a + 1, "JOT") }) {
+        Text("$state")
+    }
 }
 
 
