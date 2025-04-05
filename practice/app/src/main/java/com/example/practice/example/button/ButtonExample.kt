@@ -1,10 +1,8 @@
 package com.example.eweek05a.uicomponents
 
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccessAlarm
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -63,21 +61,4 @@ fun ButtonWithIconSample() {
         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         Text("Like")
     }
-}
-
-
-@Preview
-@Composable
-private fun Fuck() {
-    Button(
-        onClick = {},
-        content = {
-            Row {
-                Icon(Icons.Filled.AccessAlarm, contentDescription = null,
-                    modifier = Modifier.size(ButtonDefaults.IconSize))
-                Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                Text("Fuck")
-            }
-        }
-    )
 }

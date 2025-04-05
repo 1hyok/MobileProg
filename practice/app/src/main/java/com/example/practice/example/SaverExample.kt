@@ -1,75 +1,102 @@
-package com.example.practice.example//package com.example.eweek05a.uicomponents
-//
-//import android.os.Parcelable
-//import androidx.compose.foundation.layout.Column
-//import androidx.compose.material3.Text
-//import androidx.compose.runtime.Composable
-//import androidx.compose.runtime.getValue
-//import androidx.compose.runtime.mutableStateListOf
-//import androidx.compose.runtime.mutableStateOf
-//import androidx.compose.runtime.saveable.Saver
-//import androidx.compose.runtime.saveable.listSaver
-//import androidx.compose.runtime.saveable.mapSaver
-//import androidx.compose.runtime.saveable.rememberSaveable
-//import androidx.compose.runtime.setValue
-//import androidx.compose.runtime.snapshots.SnapshotStateList
-//import androidx.compose.runtime.toMutableStateList
-//import androidx.compose.ui.Modifier
-//import kotlinx.parcelize.Parcelize
-//
-//@Parcelize
-//data class City(val name: String, val country: String) : Parcelable
-//
-//@Composable
-//fun CityScreen(modifier: Modifier = Modifier) {
-//    var selectedCity by rememberSaveable {
-//        mutableStateOf(City("Madrid", "Spain"))
-//    }
-//    Text("${selectedCity.name} ${selectedCity.country}")
-//}
-//
-//data class City2(val name: String, val country: String) {
-//    companion object {
-//        val nameKey = "Name"
-//        val countryKey = "Country"
-//
-//        val cityMapSaver = mapSaver(
-//            save = { mapOf(nameKey to it.name, countryKey to it.country) },
-//            restore = {
-//                City2(it[nameKey] as String, it[countryKey] as String)
-//            }
+package com.example.practice.example
+
+import android.os.Parcelable
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.saveable.mapSaver
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class City(val name: String, val country: String) : Parcelable
+
+@Composable
+fun CityScreen(modifier: Modifier = Modifier) {
+    var selectedCity by rememberSaveable {
+        mutableStateOf(City("Madrid", "Spain"))
+    }
+    Text("${selectedCity.name} ${selectedCity.country}")
+}
+
+@Preview
+@Composable
+private fun Fuck() {
+    CityScreen()
+}
+
+data class City2(val name: String, val country: String) {
+    companion object {
+        val nameKey = "Name"
+        val countryKey = "Country"
+
+        val cityMapSaver = mapSaver(
+            save = { mapOf(nameKey to it.name, countryKey to it.country) },
+            restore = {
+                City2(it[nameKey] as String, it[countryKey] as String)
+            }
+        )
+
+        val cityListSaver = listSaver<City2, Any>(
+            save = { listOf(it.name, it.country) },
+            restore = {
+                City2(it[0] as String, it[1] as String)
+            }
+        )
+
+        val citySaver = Saver<City2, Any>(
+            save = {
+                listOf(it.name, it.country)
+            },
+            restore = {
+                val list = it as List<Any>
+                City2(list[0] as String, list[1] as String)
+            }
+        )
+    }
+}
+
+@Composable
+fun CityScreen2(modifier: Modifier = Modifier) {
+    var selectedCity by rememberSaveable(
+        stateSaver = City2.cityMapSaver
+    ) {
+        mutableStateOf(City2("Madrid", "Spain"))
+    }
+    Text("${selectedCity.name}\t${selectedCity.country}")
+}
+
+
+@Preview
+@Composable
+private fun Suck() {
+    CityScreen2()
+}
+
+data class FuckYou(var a: Int, var b: String) {
+    companion object {
+        val aKey: String = "Int"
+        val bKey: String = "String"
+//        val fuckMapSaver = mapSaver(
+//            save={ mapOf(aKey to it.a, bKey to it.b) },
+//            restore =
 //        )
-//
-//        val cityListSaver = listSaver<City2, Any>(
-//            save = { listOf(it.name, it.country) },
-//            restore = {
-//                City2(it[0] as String, it[1] as String)
-//            }
-//        )
-//
-//        val citySaver = Saver<City2, Any>(
-//            save = {
-//                listOf(it.name, it.country)
-//            },
-//            restore = {
-//                val list = it as List<Any>
-//                City2(list[0] as String, list[1] as String)
-//            }
-//        )
-//    }
-//}
-//
-//@Composable
-//fun CityScreen2(modifier: Modifier = Modifier) {
-//    var selectedCity by rememberSaveable(
-//        stateSaver = City2.cityMapSaver
-//    ) {
-//        mutableStateOf(City2("Madrid", "Spain"))
-//    }
-//
-//    Text("${selectedCity.name}\t${selectedCity.country}")
-//}
-//
+    }
+}
+
+@Preview
+@Composable
+private fun Shit() {
+
+}
+
+
 //@Composable
 //fun CityScreen3(modifier: Modifier = Modifier) {
 //    var selectedCity by rememberSaveable(
