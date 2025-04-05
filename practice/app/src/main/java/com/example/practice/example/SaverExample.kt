@@ -1,7 +1,6 @@
 package com.example.practice.example
 
 import android.os.Parcelable
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -12,7 +11,6 @@ import androidx.compose.runtime.saveable.mapSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -67,53 +65,30 @@ fun CityScreen2(modifier: Modifier = Modifier) {
     Text("${selectedCity.name}\t${selectedCity.country}")
 }
 
-data class FuckYou(var a: Int, var b: String)
 
-val fuckStateSaver =
-    Saver<FuckYou,Any>(
-        save = {
-            listOf(it.a,it.b)
-        },
-        restore = {
-//            val list = it as List<*>
-            FuckYou(it[0] as Int, it[1] as String)
-        }
-    )
-
-@Preview
 @Composable
-private fun Shit() {
-    var state by rememberSaveable(stateSaver = fuckStateSaver) {
-        mutableStateOf(FuckYou(2, "FUck"))
+fun CityScreen3(modifier: Modifier = Modifier) {
+    var selectedCity by rememberSaveable(
+        stateSaver = City2.cityListSaver
+    ) {
+        mutableStateOf(City2("Madrid", "Spain"))
     }
-    Button({ state = FuckYou(state.a + 1, "JOT") }) {
-        Text("$state")
-    }
+
+    Text("${selectedCity.name}\t${selectedCity.country}")
 }
 
+@Composable
+fun CityScreen4(modifier: Modifier = Modifier) {
+    var selectedCity by rememberSaveable(
+        stateSaver = City2.citySaver
+    ) {
+        mutableStateOf(City2("Madrid", "Spain"))
+    }
 
-//@Composable
-//fun CityScreen3(modifier: Modifier = Modifier) {
-//    var selectedCity by rememberSaveable(
-//        stateSaver = City2.cityListSaver
-//    ) {
-//        mutableStateOf(City2("Madrid", "Spain"))
-//    }
-//
-//    Text("${selectedCity.name}\t${selectedCity.country}")
-//}
-//
-//@Composable
-//fun CityScreen4(modifier: Modifier = Modifier) {
-//    var selectedCity by rememberSaveable(
-//        stateSaver = City2.citySaver
-//    ) {
-//        mutableStateOf(City2("Madrid", "Spain"))
-//    }
-//
-//    Text("${selectedCity.name}\t${selectedCity.country}")
-//}
-//
+    Text("${selectedCity.name}\t${selectedCity.country}")
+}
+
+//여기부터
 //@Composable
 //fun CityScreen5(modifier: Modifier = Modifier) {
 //    val cityListSaver = listSaver<SnapshotStateList<City2>, Any>(
@@ -144,7 +119,7 @@ private fun Shit() {
 //        }
 //    }
 //}
-//
+
 //@Composable
 //fun CityScreen6(modifier: Modifier = Modifier) {
 //    val cityMapSaver = mapSaver(
