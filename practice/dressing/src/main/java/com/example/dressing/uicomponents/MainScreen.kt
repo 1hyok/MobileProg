@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
@@ -37,11 +38,6 @@ fun MainScreen(modifier: Modifier = Modifier) {
             }
         }
     }
-}
-
-@Composable
-fun Text(x0: String) {
-    TODO("Not yet implemented")
 }
 
 @Preview
