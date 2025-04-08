@@ -1,6 +1,7 @@
 package com.example.dressing.uicomponents
 
 import android.content.res.Configuration
+import android.os.Bundle
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,12 +23,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.dressing.R
+import com.google.firebase.analytics.FirebaseAnalytics
 
 @Composable
-fun MainScreen() {
+fun MainScreen(firebaseAnalytics: FirebaseAnalytics) {
     val clothes = listOf(
         "arms",
         "ears",
@@ -104,7 +105,15 @@ fun MainScreen() {
                             Spacer(Modifier.width(30.dp))
                             Checkbox(
                                 checked = checkStates[2 * i],
-                                onCheckedChange = { checkStates[2 * i] = it },
+                                onCheckedChange = {
+                                    checkStates[2 * i] = it
+                                    val bundle = Bundle().apply {
+                                        putString(FirebaseAnalytics.Param.ITEM_ID, clothes[2 * i])
+                                        putString(FirebaseAnalytics.Param.ITEM_NAME, clothes[2 * i])
+                                        putBoolean("is_checked", it)
+                                    }
+                                    firebaseAnalytics.logEvent("clothing_item_selected", bundle)
+                                }
                             )
                             Text(clothes[2 * i])
                         }
@@ -176,10 +185,10 @@ fun MainScreen() {
     }
 }
 
-
-@Preview
-    (widthDp = 800, heightDp = 400, showBackground = true)
-@Composable
-private fun MainScreenPreview() {
-    MainScreen()
-}
+//
+//@Preview
+//    (widthDp = 800, heightDp = 400, showBackground = true)
+//@Composable
+//private fun MainScreenPreview() {
+//    MainScreen()
+//}

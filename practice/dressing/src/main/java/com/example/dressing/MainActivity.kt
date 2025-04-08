@@ -10,20 +10,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dressing.ui.theme.PracticeTheme
 import com.example.dressing.uicomponents.MainScreen
+import com.google.firebase.analytics.FirebaseAnalytics
 
 class MainActivity : ComponentActivity() {
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // Firebase Analytics 초기화
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
         setContent {
             PracticeTheme {
-                MainScreen()
-//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    Greeting(
-//                        name = "Android",
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
-//                }
+                MainScreen(firebaseAnalytics)
             }
         }
     }
