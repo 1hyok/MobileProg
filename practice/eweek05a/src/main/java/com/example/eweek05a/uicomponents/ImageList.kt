@@ -13,18 +13,31 @@ fun ImageList(
     imageList.forEachIndexed { index, imageData ->
         when (imageData.buttonType) {
             ButtonType.BADGE -> {
-                imageList[index] = imageData.copy(likes = imageData.likes + 1)
+                ImageWithButton(
+                    image = imageData.image,
+                ) {
+                    imageList[index] = imageData.copy(likes = imageData.likes + 1)
+                }
             }
 
             ButtonType.ICON -> {
-                imageList[index] = imageData.copy(likes = imageData.likes + 1)
+                ImageWithButton(
+                    image = imageData.image,
+                ) {
+                    imageList[index] = imageData.copy(likes = imageData.likes + 1)
+                }
             }
 
             ButtonType.EMOJI -> {
-                imageList[index] = imageData.copy(
-                    likes = imageData.likes + 1,
-                    dislikes = imageData.dislikes + 1
-                )
+
+                ImageWithButton(
+                    image = imageData.image,
+                ) {
+                    imageList[index] = imageData.copy(
+                        likes = imageData.likes + 1,
+                        dislikes = imageData.dislikes + 1
+                    )
+                }
             }
         }
     }
