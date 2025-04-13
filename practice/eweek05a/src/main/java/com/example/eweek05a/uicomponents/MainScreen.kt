@@ -1,0 +1,24 @@
+package com.example.eweek05a.uicomponents
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.eweek05a.viewmodel.ImageViewModel
+
+@Composable
+fun MainScreen(
+    imageViewModel: ImageViewModel = viewModel()
+) {
+    Column {
+        ImageList(
+            imageList = imageViewModel.imageList
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun MainScreenPreview() {
+    MainScreen()
+}
