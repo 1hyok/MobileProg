@@ -16,7 +16,12 @@ fun ImageList(
                 ImageWithButton(
                     image = imageData.image,
                 ) {
-                    imageList[index] = imageData.copy(likes = imageData.likes + 1)
+                    ButtonWithBadge(
+                        likes = imageData.likes
+                    ) {
+                        imageList[index] = imageData.copy(likes = imageData.likes + 1)
+                    }
+
                 }
             }
 
@@ -24,19 +29,32 @@ fun ImageList(
                 ImageWithButton(
                     image = imageData.image,
                 ) {
-                    imageList[index] = imageData.copy(likes = imageData.likes + 1)
+                    ButtonWithIcon(
+                        likes = imageData.likes
+                    ) {
+                        imageList[index] = imageData.copy(likes = imageData.likes + 1)
+                    }
+
                 }
             }
 
             ButtonType.EMOJI -> {
-
                 ImageWithButton(
                     image = imageData.image,
                 ) {
-                    imageList[index] = imageData.copy(
-                        likes = imageData.likes + 1,
-                        dislikes = imageData.dislikes + 1
-                    )
+                    ButtonWithEmoji(
+                        likes = imageData.likes,
+                        dislikes = imageData.dislikes,
+                        onClickLikes = {
+                            imageList[index] = imageData.copy(
+                                likes = imageData.likes + 1
+                            )
+                        }
+                    ) {
+                        imageList[index] = imageData.copy(
+                            dislikes = imageData.dislikes + 1
+                        )
+                    }
                 }
             }
         }

@@ -21,5 +21,10 @@ object ImagaListFactory {
             buttonType = ButtonType.ICON,
             likes = 50
         ),
+        ImageData(
+            image = ImageUri.ResImage(R.drawable.img3),
+            buttonType = ButtonType.ICON,
+            likes = 50
+        )
     )
 }
