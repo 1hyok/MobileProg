@@ -1,4 +1,4 @@
-package com.example.week06.example01.uicomponents
+package com.example.eweek06a.example.example01.uicomponents
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
 @Composable
@@ -36,4 +37,9 @@ fun HomeScreen(onNavigateA: () -> Unit, onNavigateB: () -> Unit) {
             Text(text = "Screen B")
         }
     }
+}
+
+@Preview
+@Composable
+private fun HomeScreenPreview() {
 }

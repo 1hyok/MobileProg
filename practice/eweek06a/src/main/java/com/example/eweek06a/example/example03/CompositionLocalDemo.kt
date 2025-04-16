@@ -11,7 +11,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.week06.ui.theme.MyLec2025Theme
+import com.example.eweek06a.ui.theme.MyLec2025Theme
 
 val LocalColor = staticCompositionLocalOf { Color(0xFFffdbcf) }
 

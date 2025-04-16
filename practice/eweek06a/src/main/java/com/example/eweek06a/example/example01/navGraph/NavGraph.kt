@@ -5,11 +5,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.week06.example01.model.Routes
-import com.example.week06.example01.uicomponents.HomeScreen
-import com.example.week06.example01.uicomponents.Screen_A
-import com.example.week06.example01.uicomponents.Screen_B
-import com.example.week06.example01.uicomponents.Screen_C
+import com.example.eweek06a.example.example01.model.Routes
+import com.example.eweek06a.example.example01.uicomponents.HomeScreen
+import com.example.eweek06a.example.example01.uicomponents.Screen_A
+import com.example.eweek06a.example.example01.uicomponents.Screen_B
+import com.example.eweek06a.example.example01.uicomponents.Screen_C
+import com.example.eweek06a.example.example01.uicomponents.Screen_D
 
 @Composable
 fun NavGraph(
@@ -26,7 +27,11 @@ fun NavGraph(
         }
 
         composable(route = Routes.ScreenA.route) {
-            Screen_A(onNavigate = {navController.navigate(Routes.ScreenC.route)})
+            Screen_A(
+                onNavigateC = { navController.navigate(Routes.ScreenC.route){
+                    popUpTo(Routes.Home.route)
+                } },
+                onNavigateD = { navController.navigate(Routes.ScreenD.route) })
         }
 
         composable(route = Routes.ScreenB.route) {
@@ -34,7 +39,10 @@ fun NavGraph(
         }
 
         composable(route = Routes.ScreenC.route) {
-            Screen_C(onNavigate = {navController.navigate(Routes.Home.route)})
+            Screen_C(onNavigate = { navController.navigate(Routes.Home.route) })
+        }
+        composable(route = Routes.ScreenD.route) {
+            Screen_D()
         }
     }
 }

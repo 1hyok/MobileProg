@@ -21,7 +21,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun LoginScreen(onWelcomeNavigate:()->Unit,onRegisterNavigate:()->Unit) {
+fun LoginScreen(onWelcomeNavigate:(String)->Unit,onRegisterNavigate:(String,String)->Unit) {
 
     val userId = "greenjoa"
     val userPasswd = "1234"
@@ -59,7 +59,11 @@ fun LoginScreen(onWelcomeNavigate:()->Unit,onRegisterNavigate:()->Unit) {
         )
 
         Button(onClick = {
-
+            if(loginresult){
+                onWelcomeNavigate(userIdState)
+            }else{
+                onRegisterNavigate(userIdState,userPasswdState)
+            }
         }){
             Text(text = "Login")
         }

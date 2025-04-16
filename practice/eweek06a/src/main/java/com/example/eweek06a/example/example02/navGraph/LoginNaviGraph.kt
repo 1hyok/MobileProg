@@ -18,8 +18,12 @@ fun LoginNavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Routes.Login.route) {
         composable(route = Routes.Login.route) {
             LoginScreen(
-                onWelcomeNavigate = {},
-                onRegisterNavigate = {}
+                onWelcomeNavigate = { userID ->
+                    navController.navigate(Routes.Welcome.route + "/$userID")
+                },
+                onRegisterNavigate = { userID, passWD ->
+                    navController.navigate(Routes.Register.route+ "?userID=$userID&passWD=$passWD")
+                }
             )
         }
 
