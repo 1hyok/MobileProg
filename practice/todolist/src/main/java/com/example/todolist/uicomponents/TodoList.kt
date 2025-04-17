@@ -33,23 +33,20 @@ fun TodoList(modifier: Modifier = Modifier, todoList: MutableList<Item>, showPen
                         false
                 )
             }
-            if ((!showPending && item.status == TodoStatus.COMPLETED) || (showPending && item.status == TodoStatus.PENDING)) {
+            if (!showPending || (showPending && item.status == TodoStatus.PENDING)) {
                 Card(
                     Modifier
                         .fillMaxWidth()
                         .padding(4.dp)
                 ) {
                     Row {
-                        var show = false;
                         Checkbox(
                             checked = checkState,
                             onCheckedChange = {
                                 checkState = it
                                 if (it) {
-//                                    item.status = TodoStatus.COMPLETED
                                     todoList[index] = item.copy(status = TodoStatus.COMPLETED)
                                 } else {
-//                                    item.status = TodoStatus.PENDING
                                     todoList[index] = item.copy(status = TodoStatus.PENDING)
                                 }
                             }
