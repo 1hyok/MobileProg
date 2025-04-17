@@ -20,16 +20,10 @@ fun TodoList(
     showPending: Boolean
 ) {
 //    TodoItem(todoList=todoList)
-    val filteredList = if (showPending)
-        todoList.filter {
-            it.status == TodoStatus.PENDING
-        }
-    else
-        todoList
     Column(
         modifier.fillMaxWidth()
     ) {
-        filteredList.forEach { item ->
+        todoList.forEach { item ->
             if (!showPending || item.status == TodoStatus.PENDING) {
                 Card(
                     Modifier
@@ -51,7 +45,6 @@ fun TodoList(
                     }
                 }
             }
-
         }
     }
 }

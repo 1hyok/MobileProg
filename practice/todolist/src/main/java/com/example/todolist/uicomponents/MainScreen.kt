@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,7 +20,7 @@ import com.example.todolist.model.TodoItemFactory
 @Composable
 fun MainScreen() {
 
-    val todoList = TodoItemFactory.makeTodoList()
+    val todoList = remember {  TodoItemFactory.makeTodoList()}
     var switchState by remember { mutableStateOf(false) }
 
     Column(Modifier.fillMaxHeight()) {
@@ -32,9 +33,10 @@ fun MainScreen() {
                 "미완료 항목만 보기",
                 modifier = Modifier.padding(8.dp)
             )
-            TodoSwitch(switchState) {
-                switchState = it
-            }
+            Switch(
+                checked = switchState,
+                onCheckedChange = {switchState=it}
+            )
         }
         TodoList(
             todoList = todoList,
