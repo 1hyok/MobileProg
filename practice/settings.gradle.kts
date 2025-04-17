@@ -23,4 +23,4 @@ rootProject.name = "practice"
 include(":app")
 include(":dressing")
 include(":eweek05a")
-include(":eweek06a")
+include(":eweek07a")
