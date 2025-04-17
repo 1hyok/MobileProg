@@ -5,16 +5,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.todolist.model.Item
@@ -22,51 +14,38 @@ import com.example.todolist.model.TodoItemFactory
 import com.example.todolist.model.TodoStatus
 
 @Composable
-fun TodoList(modifier: Modifier = Modifier, todoList:SnapshotStateList<Item>, showPending: Boolean) {
+fun TodoList(
+    modifier: Modifier = Modifier,
+    todoList: MutableList<Item>,
+    showPending: Boolean
+) {
 //    TodoItem(todoList=todoList)
-    Column(modifier.fillMaxWidth()) {
-        todoList.forEachIndexed { index,item ->
-            var checkState by remember {
-                mutableStateOf(
-                    if (item.status == TodoStatus.COMPLETED)
-                        true
-                    else
-                        false
-                )
-            }
-            if (!showPending || (showPending && item.status == TodoStatus.PENDING)) {
+    Column(
+        modifier.fillMaxWidth()
+    ) {
+        todoList.forEachIndexed { index, item ->
+            if (!showPending || item.status == TodoStatus.PENDING) {
                 Card(
                     Modifier
                         .fillMaxWidth()
                         .padding(4.dp)
                 ) {
                     Row {
-                        Checkbox(
-                            checked = checkState,
-                            onCheckedChange = {
-                                checkState = it
-                            }
-                        )
-                        Column {
-                            Text(
-                                item.content,
-                                textDecoration = if (item.status == TodoStatus.PENDING)
-                                    null
+                        TodoCheckbox(
+                            item.status == TodoStatus.COMPLETED,
+                        ) { checked ->
+                            todoList[index] = item.copy(
+                                status = if (checked)
+                                    TodoStatus.COMPLETED
                                 else
-                                    TextDecoration.LineThrough
+                                    TodoStatus.PENDING
                             )
-                            Text(item.time)
                         }
+                        TodoItem(item = item)
                     }
                 }
             }
-            if (checkState) {
-                todoList[index] = item.copy(status = TodoStatus.COMPLETED)
-//                todoList.add(todoList.removeAt(todoList.lastIndex))
-            } else {
-                todoList[index] = item.copy(status = TodoStatus.PENDING)
-//                todoList.add(todoList.removeAt(todoList.lastIndex))
-            }
+
         }
     }
 }

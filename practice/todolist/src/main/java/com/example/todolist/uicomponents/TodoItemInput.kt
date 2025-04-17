@@ -11,7 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,7 +21,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @Composable
-fun TodoItemInput(modifier: Modifier = Modifier, todolist: SnapshotStateList<Item>) {
+fun TodoItemInput(modifier: Modifier = Modifier, todolist: MutableList<Item>) {
     var state by remember { mutableStateOf("") }
     Row(horizontalArrangement = Arrangement.SpaceAround) {
         TextField(

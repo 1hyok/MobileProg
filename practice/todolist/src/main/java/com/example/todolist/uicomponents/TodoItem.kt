@@ -11,34 +11,31 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.todolist.model.Item
-import com.example.todolist.model.TodoItemFactory
 import com.example.todolist.model.TodoStatus
 
-//@Composable
-//fun TodoItem(modifier: Modifier = Modifier, todoList: MutableList<Item>) {
-//    Column {
-//        todoList.forEach {
-//            Column {
-//                Text(
-//                    it.content,
-//                    textDecoration = when (it.status) {
-//                        TodoStatus.COMPLETED -> TextDecoration.LineThrough
-//                        else -> null
-//                    },
-//                    fontSize = 16.sp
-//                )
-//                Spacer(Modifier.height(4.dp))
-//                Text(
-//                    it.time,
-//                    fontSize = 16.sp
-//                )
-//            }
-//        }
-//    }
-//}
-//
-//@Preview
-//@Composable
-//private fun TodoItemPreview() {
+@Composable
+fun TodoItem(modifier: Modifier = Modifier, item: Item) {
+    Column {
+        Column {
+            Text(
+                item.content,
+                textDecoration = when (item.status) {
+                    TodoStatus.COMPLETED -> TextDecoration.LineThrough
+                    else -> null
+                },
+                fontSize = 16.sp
+            )
+            Spacer(Modifier.height(4.dp))
+            Text(
+                item.time,
+                fontSize = 16.sp
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun TodoItemPreview() {
 //    TodoItem(todoList = TodoItemFactory.makeTodoList())
-//}
+}
