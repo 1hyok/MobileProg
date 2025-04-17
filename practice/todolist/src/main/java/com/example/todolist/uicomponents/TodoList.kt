@@ -20,10 +20,16 @@ fun TodoList(
     showPending: Boolean
 ) {
 //    TodoItem(todoList=todoList)
+    val filteredList = if (showPending)
+        todoList.filter {
+            it.status == TodoStatus.PENDING
+        }
+    else
+        todoList
     Column(
         modifier.fillMaxWidth()
     ) {
-        todoList.forEachIndexed { index, item ->
+        filteredList.forEach { item ->
             if (!showPending || item.status == TodoStatus.PENDING) {
                 Card(
                     Modifier
@@ -34,7 +40,7 @@ fun TodoList(
                         TodoCheckbox(
                             item.status == TodoStatus.COMPLETED,
                         ) { checked ->
-                            todoList[index] = item.copy(
+                            todoList[todoList.indexOf(item)] = item.copy(
                                 status = if (checked)
                                     TodoStatus.COMPLETED
                                 else
