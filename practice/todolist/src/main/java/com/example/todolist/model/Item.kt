@@ -1,7 +1,7 @@
 package com.example.todolist.model
 
-class Item(
+data class Item(
     val content: String,
     val time:String,
-    val status: TodoStatus = TodoStatus.PENDING
+    var status: TodoStatus = TodoStatus.PENDING
 )
