@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "practice"
 include(":eweek07a")
 include(":todolist")
+include(":imglist")

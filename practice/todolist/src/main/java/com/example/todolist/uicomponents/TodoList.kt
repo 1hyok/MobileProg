@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,9 +21,9 @@ fun TodoList(
     todoList: MutableList<Item>,
     showPending: Boolean
 ) {
-//    TodoItem(todoList=todoList)
+    val scrollState = rememberScrollState()
     Column(
-        modifier.fillMaxWidth()
+        modifier.fillMaxWidth().verticalScroll(scrollState)//스크롤
     ) {
         todoList.forEach { item ->
             if (!showPending || item.status == TodoStatus.PENDING) {
