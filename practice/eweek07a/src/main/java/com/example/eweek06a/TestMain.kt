@@ -2,18 +2,16 @@ package com.example.eweek06a
 
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.eweek06a.example.example01.uicomponents.MainScreen
 import com.example.eweek06a.ui.theme.MyLec2025Theme
 import com.example.week06.example02.uicomponents.LoginMainScreen
 import com.example.week06.example03.Composable1
 
-@Preview
-@Composable
-fun MainScreenPreview(modifier: Modifier = Modifier) {
-    MainScreen()
-}
+//@Preview
+//@Composable
+//fun MainScreenPreview(modifier: Modifier = Modifier) {
+//    MainScreen()
+//}
 
 @Preview
 @Composable
