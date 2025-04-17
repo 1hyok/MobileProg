@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,7 +22,7 @@ import com.example.todolist.model.TodoItemFactory
 import com.example.todolist.model.TodoStatus
 
 @Composable
-fun TodoList(modifier: Modifier = Modifier, todoList: MutableList<Item>, showPending: Boolean) {
+fun TodoList(modifier: Modifier = Modifier, todoList:SnapshotStateList<Item>, showPending: Boolean) {
 //    TodoItem(todoList=todoList)
     Column(modifier.fillMaxWidth()) {
         todoList.forEachIndexed { index,item ->
@@ -44,11 +45,6 @@ fun TodoList(modifier: Modifier = Modifier, todoList: MutableList<Item>, showPen
                             checked = checkState,
                             onCheckedChange = {
                                 checkState = it
-                                if (it) {
-                                    todoList[index] = item.copy(status = TodoStatus.COMPLETED)
-                                } else {
-                                    todoList[index] = item.copy(status = TodoStatus.PENDING)
-                                }
                             }
                         )
                         Column {
@@ -64,7 +60,13 @@ fun TodoList(modifier: Modifier = Modifier, todoList: MutableList<Item>, showPen
                     }
                 }
             }
-
+            if (checkState) {
+                todoList[index] = item.copy(status = TodoStatus.COMPLETED)
+//                todoList.add(todoList.removeAt(todoList.lastIndex))
+            } else {
+                todoList[index] = item.copy(status = TodoStatus.PENDING)
+//                todoList.add(todoList.removeAt(todoList.lastIndex))
+            }
         }
     }
 }

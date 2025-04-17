@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,7 +22,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @Composable
-fun TodoItemInput(modifier: Modifier = Modifier,todolist: MutableList<Item>) {
+fun TodoItemInput(modifier: Modifier = Modifier, todolist: SnapshotStateList<Item>) {
     var state by remember { mutableStateOf("") }
     Row(horizontalArrangement = Arrangement.SpaceAround) {
         TextField(
@@ -31,14 +32,19 @@ fun TodoItemInput(modifier: Modifier = Modifier,todolist: MutableList<Item>) {
         )
         Button(
             {
-                todolist.add(Item(
-                    content = state,
-                    time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd HH:mm")),
-                ))
+                todolist.add(
+                    Item(
+                        content = state,
+                        time = LocalDateTime.now()
+                            .format(DateTimeFormatter.ofPattern("MM-dd HH:mm")),
+                    )
+                )
             },
-            modifier = Modifier.padding(
-                end = 4.dp
-            ).align(Alignment.CenterVertically)
+            modifier = Modifier
+                .padding(
+                    end = 4.dp
+                )
+                .align(Alignment.CenterVertically)
         ) {
             Text("추가")
         }
