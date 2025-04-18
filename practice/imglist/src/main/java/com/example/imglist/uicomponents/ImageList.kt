@@ -1,21 +1,43 @@
 package com.example.imglist.uicomponents
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.imglist.model.ButtonType
 import com.example.imglist.model.ImageData
 import com.example.imglist.model.ImageListFactory
+import kotlinx.coroutines.launch
 
 @Composable
 fun ImageList(
     modifier: Modifier = Modifier,
     imageList: MutableList<ImageData>
 ) {
-    Column {
+    val state = rememberLazyListState()
+    val showButton by remember {
+        derivedStateOf {
+            state.firstVisibleItemIndex > 0
+        }
+    }
 
-        imageList.forEachIndexed { index, imageData ->
+    val scope = rememberCoroutineScope()
+
+    LazyColumn(
+        Modifier.fillMaxWidth(),
+        state = state,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        itemsIndexed(items = imageList) { index, imageData ->
             ImageWithButton(
                 imageUri = imageData.imageUri
             ) {
@@ -44,6 +66,13 @@ fun ImageList(
 
                     else -> throw IllegalArgumentException("타입 오류")
                 }
+            }
+        }
+    }
+    AnimatedVisibility(showButton) {
+        ScrollToTopButton {
+            scope.launch {
+                state.scrollToItem(0)
             }
         }
     }
