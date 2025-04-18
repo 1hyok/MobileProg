@@ -1,11 +1,11 @@
 package com.example.todolist.uicomponents
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,10 +22,11 @@ fun TodoList(
     showPending: Boolean
 ) {
     val scrollState = rememberScrollState()
-    Column(
-        modifier.fillMaxWidth().verticalScroll(scrollState)//스크롤
+    LazyColumn(
+        modifier.fillMaxWidth()
+//            .verticalScroll(scrollState)//스크롤
     ) {
-        todoList.forEach { item ->
+        itemsIndexed(todoList) { index,item ->
             if (!showPending || item.status == TodoStatus.PENDING) {
                 Card(
                     Modifier
@@ -36,7 +37,7 @@ fun TodoList(
                         TodoCheckbox(
                             item.status == TodoStatus.COMPLETED,
                         ) { checked ->
-                            todoList[todoList.indexOf(item)] = item.copy(
+                            todoList[index] = item.copy(
                                 status = if (checked)
                                     TodoStatus.COMPLETED
                                 else
@@ -49,6 +50,34 @@ fun TodoList(
             }
         }
     }
+//    Column(
+//        modifier.fillMaxWidth()
+//            .verticalScroll(scrollState)//스크롤
+//    ) {
+//        todoList.forEachIndexed { index,item ->
+//            if (!showPending || item.status == TodoStatus.PENDING) {
+//                Card(
+//                    Modifier
+//                        .fillMaxWidth()
+//                        .padding(4.dp)
+//                ) {
+//                    Row {
+//                        TodoCheckbox(
+//                            item.status == TodoStatus.COMPLETED,
+//                        ) { checked ->
+//                            todoList[index] = item.copy(
+//                                status = if (checked)
+//                                    TodoStatus.COMPLETED
+//                                else
+//                                    TodoStatus.PENDING
+//                            )
+//                        }
+//                        TodoItem(item = item)
+//                    }
+//                }
+//            }
+//        }
+//    }
 }
 
 @Preview

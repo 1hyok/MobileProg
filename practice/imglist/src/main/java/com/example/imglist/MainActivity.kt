@@ -16,6 +16,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticeTheme {
                 MainScreen()
+//                Test()
             }
         }
     }
@@ -25,6 +26,5 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreenPreview() {
     PracticeTheme {
-        MainScreen()
     }
 }
