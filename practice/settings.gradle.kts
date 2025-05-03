@@ -23,3 +23,5 @@ rootProject.name = "practice"
 include(":eweek07a")
 include(":todolist")
 include(":imglist")
+include(":loginscreen")
+include(":dollclothing")

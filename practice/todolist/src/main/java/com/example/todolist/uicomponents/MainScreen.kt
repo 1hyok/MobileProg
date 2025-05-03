@@ -25,7 +25,6 @@ fun MainScreen(
 
 //    val todoList = remember {  TodoItemFactory.makeTodoList()}
 
-//    val todoList = todoViewModel.todoList
     val todoViewModel:TodoViewModel = viewModel()
     val todoList = todoViewModel.todoList
 
@@ -33,8 +32,9 @@ fun MainScreen(
 
     Column(Modifier.fillMaxHeight()) {
         TodoListTitle()
+
         Row(
-            Modifier.align(Alignment.End),
+            Modifier.align(Alignment.End),//모디파이어는 자기 자채를 정렬. 바깥 요소에 따라 적절한 것 선택
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -46,16 +46,52 @@ fun MainScreen(
                 onCheckedChange = {switchState=it}
             )
         }
+
         TodoList(
             todoList = todoList,
             modifier = Modifier.weight(1f),
             showPending = switchState
         )
+
         TodoItemInput(
             todolist = todoList
         )
     }
+//    LazyColumn(Modifier.fillMaxHeight()) {
+//        item{
+//            TodoListTitle()
+//        }
+//        item{
+//            Row(
+//                Modifier.fillMaxWidth().padding(4.dp),
+//                horizontalArrangement = Arrangement.End,
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//                Text(
+//                    "미완료 항목만 보기",
+//                    modifier = Modifier.padding(8.dp)
+//                )
+//                Switch(
+//                    checked = switchState,
+//                    onCheckedChange = {switchState=it}
+//                )
+//            }
+//        }
+//        item{
+//            TodoList(
+//                todoList = todoList,
+////                modifier = Modifier.weight(1f),
+//                showPending = switchState
+//            )
+//        }
+//        item{
+//            TodoItemInput(
+//                todolist = todoList
+//            )
+//        }
+//    }
 }
+
 
 
 @Preview

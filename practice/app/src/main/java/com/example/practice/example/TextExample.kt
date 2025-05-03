@@ -30,41 +30,41 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 
-//@Preview(showBackground = true)
-//@Composable
-//fun SimpleText() {
-//    Text("Hello World")
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun StringResourceText() {
-//    Text(stringResource(R.string.hello_world))
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun BlueText() {
-//    Text("Hello World", color = Color.Blue)
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun BigText() {
-//    Text("Hello World", fontSize = 30.sp)
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun ItalicText() {
-//    Text("Hello World", fontStyle = FontStyle.Italic)
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun BoldText() {
-//    Text("Hello World", fontWeight = FontWeight.Bold)
-//}
+@Preview(showBackground = true)
+@Composable
+fun SimpleText() {
+    Text("Hello World")
+}
+
+@Preview(showBackground = true)
+@Composable
+fun StringResourceText() {
+    Text(stringResource(R.string.hello_world))
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BlueText() {
+    Text("Hello World", color = Color.Blue)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BigText() {
+    Text("Hello World", fontSize = 30.sp)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ItalicText() {
+    Text("Hello World", fontStyle = FontStyle.Italic)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BoldText() {
+    Text("Hello World", fontWeight = FontWeight.Bold)
+}
 
 @Preview(showBackground = true)
 @Composable
@@ -93,14 +93,14 @@ fun TextShadow() {
     )
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun DifferentFonts() {
-//    Column {
-//        Text("Hello World", fontFamily = FontFamily.Serif)
-//        Text("Hello World", fontFamily = FontFamily.SansSerif)
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun DifferentFonts() {
+    Column {
+        Text("Hello World", fontFamily = FontFamily.Serif)
+        Text("Hello World", fontFamily = FontFamily.SansSerif)
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
