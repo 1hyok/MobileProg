@@ -8,7 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.week10.example05.NotificationApp
+import com.example.week10.example06.NotificationMainScreen
 import com.example.week10.ui.theme.Week10Theme
 
 class MainActivity : ComponentActivity() {
@@ -17,7 +17,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Week10Theme {
-                NotificationApp()
+                NotificationMainScreen()
+//                NotificationApp()
 //                MainScreen05()
 //                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                    Greeting(
