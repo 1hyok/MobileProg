@@ -1,4 +1,4 @@
-package com.example.week10.example02
+package com.example.week10.example03
 
 import android.Manifest
 import android.content.Intent
@@ -15,12 +15,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.example.week10.functions.makeCall
-import com.example.week10.uicomponents.PermissionButton
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.example.week10.functions.showCamera
+import com.example.week10.uicomponents.PermissionButton2
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun MainScreen03(modifier: Modifier = Modifier) {
+fun MainScreen04(modifier: Modifier = Modifier) {
     val context = LocalContext.current
     Column(
         modifier = modifier.fillMaxSize(),
@@ -35,6 +34,7 @@ fun MainScreen03(modifier: Modifier = Modifier) {
                 data = "https://www.naver.com".toUri()
             }
             context.startActivity(webIntent)
+
         }, modifier = Modifier.width(200.dp)) {
             Text("네이버")
         }
@@ -56,16 +56,16 @@ fun MainScreen03(modifier: Modifier = Modifier) {
             Text("문자보내기")
         }
 
-        PermissionButton(
+        PermissionButton2(
             permission = Manifest.permission.CALL_PHONE,
             label = "전화걸기",
             onGranted = { makeCall(context) }
         )
 
-//        Button(onClick = {
-//            requestCallPermission()
-//        }, modifier = Modifier.width(200.dp)) {
-//            Text("전화걸기")
-//        }
+        PermissionButton2(
+            permission = Manifest.permission.CAMERA,
+            label = "카메라",
+            onGranted = { showCamera(context) }
+        )
     }
 }

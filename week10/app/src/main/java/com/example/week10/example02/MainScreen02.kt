@@ -17,13 +17,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
-import com.example.week10.example01.MainScreen01
 import com.example.week10.functions.makeCall
-import com.example.week10.uicomponents.RationaleDialog
-import com.example.week10.uicomponents.SettingsDialog
+import com.example.week10.uicomponents.RationaleCallDialog
+import com.example.week10.uicomponents.SettingsCallDialog
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -43,11 +41,9 @@ fun MainScreen02(modifier: Modifier = Modifier) {
             callPermissionState.status.isGranted -> {
                 makeCall(context)
             }
-
             callPermissionState.status.shouldShowRationale -> {
                 showCallDialog = true
             }
-
             else -> {
                 if (permissionConfirm) {
                     showSettingDialog = true
@@ -60,7 +56,7 @@ fun MainScreen02(modifier: Modifier = Modifier) {
     }
 
     if (showCallDialog) {
-        RationaleDialog(
+        RationaleCallDialog(
             onDismiss = { showCallDialog = false },
             onConfirm = {
                 showCallDialog = false
@@ -70,7 +66,7 @@ fun MainScreen02(modifier: Modifier = Modifier) {
     }
 
     if (showSettingDialog) {
-        SettingsDialog(
+        SettingsCallDialog(
             onDismiss = { showSettingDialog = false },
             onGoToSettings = {
                 showSettingDialog = false
@@ -134,10 +130,4 @@ fun MainScreen02(modifier: Modifier = Modifier) {
 //            Text("전화걸기")
 //        }
     }
-}
-
-@Preview
-@Composable
-private fun MainScreen01Preview() {
-    MainScreen01()
 }
