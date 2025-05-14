@@ -1,5 +1,6 @@
 package com.example.week10.example06
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -10,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 
 @Composable
 fun NotificationNavGraph() {
@@ -30,9 +32,18 @@ fun NotificationNavGraph() {
                     type = NavType.StringType
                     defaultValue = "noMsg"
                 }
-            )
+            ),
             //deepLinks 추가
-
+            deepLinks = listOf(
+                navDeepLink {
+                    uriPattern = "myapp://greenjoahome.com/{msg}"
+                    action = Intent.ACTION_VIEW
+                },
+                navDeepLink {
+                    uriPattern = "myapp://greenjoahome.com?msg={msg}"
+                    action = Intent.ACTION_VIEW
+                }
+            )
         ) {
             val msg = it.arguments?.getString("msg") ?: "noMsg"
             MsgShow(msg = msg)

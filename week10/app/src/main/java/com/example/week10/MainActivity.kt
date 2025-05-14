@@ -8,7 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.week10.example03.MainScreen04
+import com.example.week10.example06.NotificationNavGraph
 import com.example.week10.ui.theme.Week10Theme
 
 class MainActivity : ComponentActivity() {
@@ -17,10 +17,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Week10Theme {
-//                NotificationNavGraph()
+                NotificationNavGraph()
 //                NotificationApp()
 //                MainScreen03()
-                MainScreen04()
+//                MainScreen04()
 //                MainScreen05()
 //                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                    Greeting(
