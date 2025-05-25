@@ -42,3 +42,29 @@ fun FetchDaumNews(newsViewModel: NewsViewModel = viewModel()) {
         )
     }
 }
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun FetchMelonChart(melonViewModel: MelonViewModel = viewModel()) {
+    val songList = melonViewModel.songList
+    val isLoading = melonViewModel.isLoading.value
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = isLoading,
+        onRefresh = { melonViewModel.fetchSongs() }
+    )
+    LaunchedEffect(Unit) {
+        melonViewModel.fetchSongs()
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .pullRefresh(pullRefreshState)
+    ) {
+        SongList(list = songList)
+        PullRefreshIndicator(
+            refreshing = isLoading,
+            state = pullRefreshState,
+            modifier = Modifier.align(Alignment.TopCenter)
+        )
+    }
+}

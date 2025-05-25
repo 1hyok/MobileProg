@@ -2,6 +2,7 @@ package com.example.week11.example01
 
 import android.content.Intent
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -20,6 +21,10 @@ data class NewsData(
     var title: String,
     var newsUrl: String
 )
+data class SongData(
+    var title: String,
+    var artist: String
+)
 
 @Composable
 fun NewsItem(news: NewsData) {
@@ -34,12 +39,32 @@ fun NewsItem(news: NewsData) {
         Text(news.title, fontSize = 20.sp)
     }
 }
+@Composable
+fun SongItem(song: SongData) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column {
+            Text(song.title, fontSize = 20.sp)
+            Text(song.artist, fontSize = 20.sp)
+        }
+    }
+}
 
 @Composable
 fun NewsList(list: List<NewsData>) {
     LazyColumn {
         items(list) { item ->
             NewsItem(item)
+            HorizontalDivider(color = Color.Black, thickness = 1.dp)
+        }
+    }
+}
+@Composable
+fun SongList(list: List<SongData>) {
+    LazyColumn {
+        items(list) { item ->
+            SongItem(item)
             HorizontalDivider(color = Color.Black, thickness = 1.dp)
         }
     }
