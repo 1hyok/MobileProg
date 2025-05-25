@@ -2,6 +2,7 @@ package com.example.week11.example01
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,11 @@ class NewsViewModel : ViewModel() {
     private val _newsList = mutableStateListOf<NewsData>()
     val newsList = _newsList
 
+    private val _isLoading = mutableStateOf(false)
+    val isLoading = _isLoading
+
     fun fetchNews() {
+        _isLoading.value = true
         viewModelScope.launch {
             try {
                 val fetchedNews = getNews()
@@ -22,6 +27,8 @@ class NewsViewModel : ViewModel() {
                 _newsList.addAll(fetchedNews)
             } catch (e: Exception) {
                 Log.e("error", "fetch 관련 오류 발생", e)
+            } finally{
+                _isLoading.value = false
             }
         }
     }
@@ -32,6 +39,9 @@ class NewsViewModel : ViewModel() {
             .referrer("https://www.google.com")
             .timeout(10000)
             .get()
+
+        Log.i("jsoup", doc.text())
+        Log.i("jsoup", doc.html())
 
         val headlines = doc.select("ul.list_newsheadline2>li")
         headlines.mapNotNull { li ->
