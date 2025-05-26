@@ -8,6 +8,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,7 +19,7 @@ import com.example.week12.roomDB.ItemEntity
 import com.example.week12.viewmodel.ItemViewModel
 
 @Composable
-fun InputScreen(viewModel: ItemViewModel) {
+fun InputScreen(viewModel: ItemViewModel, selectedItem: ItemEntity?) {
 
     var itemId by remember {
         mutableStateOf("")
@@ -41,6 +42,14 @@ fun InputScreen(viewModel: ItemViewModel) {
         itemName = ""
         itemQuantity = ""
         itemId = ""
+    }
+
+    LaunchedEffect(selectedItem){
+        if (selectedItem != null){
+            itemId = selectedItem.itemID.toString()
+            itemName = selectedItem.itemName
+            itemQuantity = selectedItem.itemQuantity.toString()
+        }
     }
 
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -84,7 +93,10 @@ fun InputScreen(viewModel: ItemViewModel) {
             }) {
                 Text("delete")
             }
-            Button(onClick = { }) {
+            Button(onClick = {
+                viewModel.getItems("$itemName%")
+                clearText()
+            }) {
                 Text("find")
             }
         }

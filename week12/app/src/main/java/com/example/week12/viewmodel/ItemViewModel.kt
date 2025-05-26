@@ -25,6 +25,14 @@ class ItemViewModel(private val repository: ItemRepository) : ViewModel() {
         getAllItems()
     }
 
+    fun getItems(itemName: String) {
+        viewModelScope.launch {
+            repository.getItems(itemName).collect {
+                _itemList.value = it
+            }
+        }
+    }
+
     fun getAllItems() {
         viewModelScope.launch {
             repository.getAllItems().collect {
