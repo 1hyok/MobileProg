@@ -29,7 +29,6 @@ class ItemViewModel(private val repository: ItemRepository) : ViewModel() {
         viewModelScope.launch {
             repository.getAllItems().collect {
                 _itemList.value = it
-                getAllItems()
             }
         }
     }
